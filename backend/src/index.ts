@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
-import { sign } from 'hono/jwt'
+import { sign, verify } from 'hono/jwt'
 
 interface CloudflareBindings {
   DATABASE_URL: string;
@@ -9,6 +9,18 @@ interface CloudflareBindings {
 
 const app = new Hono<{ Bindings: CloudflareBindings, Env: { DATABASE_URL: string } }>()
 
+app.use('/api/v1/blog/*', async(c, next)=>{
+  const header = c.req.header("Authorization")
+ const token = header?.split(" ")[1]
+ if (token) {
+  const response = await verify(token, "crazzzyy")
+ if (response.id){
+  return next()
+ } else{
+  return c.json({ error: 'invalid token' }, 401);
+ }
+ }
+})
 
 app.post('/api/v1/signup',async (c) => {
   try {
@@ -19,7 +31,7 @@ app.post('/api/v1/signup',async (c) => {
     const user = await prisma.user.create({
       data: {
         name: body.name,
-        email: body.email,
+        username: body.username,
         password: body.password
       }
     })
@@ -40,7 +52,7 @@ app.post('/api/v1/signin',async (c)=>{
     const body = await c.req.json()
     const user = await prisma.user.findUnique({
       where: {
-        email: body.email,    
+        username: body.username,    
       }
     })
     if (user && user.password == body.password) {
