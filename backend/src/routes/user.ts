@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { signupInput } from "@vishurizz/medium-blog";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
 
@@ -16,6 +17,10 @@ userRouter.post('/signup',async (c) => {
         datasourceUrl:  c.env.DATABASE_URL
       }).$extends(withAccelerate())
       const body = await c.req.json()
+      const { success } = signupInput.safeParse(body)
+      if (!success) {
+        return c.json({ error: 'Invalid input, zod validation failed' }, 400);
+      }
       const user = await prisma.user.create({
         data: {
           name: body.name,
