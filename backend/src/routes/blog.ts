@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { createBlogInput } from "@vishurizz/medium-blog";
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
 
@@ -61,6 +62,10 @@ blogRouter.post('/add-blog', async (c) => {
       throw new Error('User ID is required');
     }
     const body = await c.req.json() || "";
+    const { success } = createBlogInput.safeParse(body)
+    if (!success) {
+      return c.json({ error: 'Invalid input, zod validation failed' }, 400);
+    }
     const blog = await prisma.blog.create({
       data: {
         title: body.title,
