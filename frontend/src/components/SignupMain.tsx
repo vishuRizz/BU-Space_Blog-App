@@ -27,7 +27,6 @@ const SignupMain = () => {
         alert("Signup failed");
         return;
       }
-
       localStorage.setItem("token","Bearer "+ jwt);  
       navigate("/blogs"); 
     } catch (error) {
@@ -60,8 +59,6 @@ const SignupMain = () => {
                 id="name"
                 placeholder="Name"
               />
-
-             
               <input
                 onChange={(e) =>
                   setPostInputs({
@@ -75,8 +72,6 @@ const SignupMain = () => {
                 id="username"
                 placeholder="Username"
               />
-
-             
               <input
                 onChange={(e) =>
                   setPostInputs({

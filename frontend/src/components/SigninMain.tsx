@@ -1,39 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { SigninInput } from "@vishurizz/medium-blog";
+import { useNavigate } from "react-router-dom";
 
 const SigninMain = () => {
+  const navigate = useNavigate();
+  
+  const [postInputs, setPostInputs] = useState<SigninInput>({
+    username: "",
+    password: "",
+  });
+
+  async function SigninRequest(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); 
+
+    try {
+      console.log("control reaches axios call");
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs);
+      const jwt = response.data.jwt;  
+
+      if (!jwt) {
+        alert("Signup failed");
+        return;
+      }
+      localStorage.setItem("token","Bearer "+ jwt);  
+      navigate("/blogs"); 
+    } catch (error) {
+      console.error("Error during signin:", error);
+      alert(error);
+    }
+  }
 
   return (
     <div className="flex items-center justify-center h-screen">
     <StyledWrapper>
       <div className="container">
         <div className="heading">Sign In</div>
-        <form action="" className="form">
-          <input
-            required
-            className="input"
-            name="email"
-            id="email"
-            placeholder="Username"
-          />
-          <input
-            required
-            className="input"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-          />
-          <span className="forgot-password">
-            <a href="#">Forgot Password ?</a>
-          </span>
-          <input className="cursor-pointer login-button" type="submit" value="Sign In" />
-          <div>
-            <a className="ml-2 cursor-pointer" href="">Don't have an Account? Signup </a>
-          </div>
-        </form>
+        <form className="form" onSubmit={SigninRequest}>
+              <input
+                onChange={(e) =>
+                  setPostInputs({
+                    ...postInputs,
+                    username: e.target.value,
+                  })
+                }
+                required
+                className="input"
+                name="username"
+                id="username"
+                placeholder="Username"
+              />
+              <input
+                onChange={(e) =>
+                  setPostInputs({
+                    ...postInputs,
+                    password: e.target.value,
+                  })
+                }
+                required
+                className="input"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+              />
+
+             
+              <button className="login-button" type="submit">
+                Sign Up
+              </button>
+            </form>
         <div className="social-account-container">
           <span className="title">Or Sign in with</span>
           <div className="social-accounts">
