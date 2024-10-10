@@ -1,4 +1,4 @@
-import React from 'react'
+
 import SigninMain from '../../components/SigninMain'
 import SignupRight from '../../components/AuthContent'
 
