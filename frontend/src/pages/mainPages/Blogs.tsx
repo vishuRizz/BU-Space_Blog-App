@@ -21,7 +21,6 @@ function Blogs() {
     <main className="">
     <Navbar />
     <div className="flex">
-     
       <div className="w-full md:w-[65%] h-screen border-r overflow-y-auto flex justify-center items-start">
         <div className="w-full max-w-2xl p-4">
           {blogs.map(blog=>(
