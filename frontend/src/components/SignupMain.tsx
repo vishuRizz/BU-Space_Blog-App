@@ -94,9 +94,11 @@ const SignupMain = () => {
             </form>
 
             <div>
-              <a className="cursor-pointer" href="#">
+              <div className="cursor-pointer" onClick={()=>{
+                navigate("/signin")
+              }}>
                 Already have an account? Sign In
-              </a>
+              </div>
             </div>
 
         

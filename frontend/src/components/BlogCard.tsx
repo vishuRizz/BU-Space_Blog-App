@@ -17,7 +17,7 @@ function BlogCard({autherName, title, content, publishedDate, id}: blogCardInter
         <AvatarComp name={autherName} />
       </div>
       <div className="font-semibold text-gray-700">
-        <span className="text-lg">{autherName}</span>
+        <span className="text-lg capitalize">{autherName}</span>
         <span className="block text-sm text-gray-500">{publishedDate}</span>
       </div>
     </div>

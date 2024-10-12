@@ -72,6 +72,11 @@ const SigninMain = () => {
                 Sign Up
               </button>
             </form>
+            <div className="cursor-pointer" onClick={()=>{
+                navigate("/signup")
+              }}>
+                Don't have an account? Sign Up
+              </div>
         <div className="social-account-container">
           <span className="title">Or Sign in with</span>
           <div className="social-accounts">

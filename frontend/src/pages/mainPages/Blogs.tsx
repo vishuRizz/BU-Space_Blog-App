@@ -8,8 +8,11 @@ function Blogs() {
     const {loading, blogs} = useBlog();
     if(loading){
         return (
+          <div >
+            <Navbar/>
             <div className="flex items-center justify-center w-full h-screen">
                <Loader/>
+            </div>
             </div>
         )
     }

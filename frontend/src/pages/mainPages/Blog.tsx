@@ -2,19 +2,24 @@ import { useParams } from "react-router-dom"
 import Navbar from "../../components/Navbar"
 import { UseBlogId } from "../../hooks"
 import SingleBlog from "../../components/SingleBlog"
-import Loader from "../../components/miniComponents/Loader"
-
+import LoaderTwo from "../../components/miniComponents/LoaderTwo"
 
 function Blog() {
-  const id = useParams()
+  const { id } = useParams<{ id: string }>();
   const {loading, blog} = UseBlogId({
     id: Number(id)
   })
-
   if(loading){
     return (
       <div className="flex items-center justify-center w-full h-screen">
-         <Loader/>
+         <LoaderTwo/>
+      </div>
+    )
+  }
+  if(!blog){
+    return(
+      <div>
+        The Blog with this Blog id does not exist anymore
       </div>
     )
   }
