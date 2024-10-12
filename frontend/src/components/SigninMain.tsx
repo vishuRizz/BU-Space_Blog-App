@@ -50,7 +50,7 @@ const SigninMain = () => {
                 className="input"
                 name="username"
                 id="username"
-                placeholder="Username"
+                placeholder="Email"
               />
               <input
                 onChange={(e) =>
