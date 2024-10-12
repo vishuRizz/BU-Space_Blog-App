@@ -70,12 +70,12 @@ function About() {
           <h1 ref={headingRef} className="mb-8 text-5xl font-light text-white font-poppins">
             ANONYMOUS BU Blogging Platform
           </h1>
-          <p ref={textRef1} className="max-w-2xl mb-6 text-lg font-thin text-center text-white font-roboto">
+          <p ref={textRef1} className="max-w-2xl mb-6 text-xl text-center text-slate-200 font-roboto">
             At BU SPACE, we believe in the power of free speech and the right to express oneself
             anonymously. Our platform allows you to share your thoughts, stories, and ideas without
             fear of judgment. Join us in creating a safe space for open dialogue and creativity.
           </p>
-          <p ref={textRef2} className="max-w-2xl mb-6 text-lg font-thin text-center text-white font-roboto">
+          <p ref={textRef2} className="max-w-2xl mb-6 text-xl text-center text-slate-200 font-roboto">
             Whether you want to blog about personal experiences, current events, Clubs, fights or creative writing,
             our platform is here to support you. Let's bring your voice to the world, anonymously and freely!
           </p>

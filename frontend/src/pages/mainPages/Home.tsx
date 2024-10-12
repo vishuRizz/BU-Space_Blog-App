@@ -5,6 +5,7 @@ import blogImg from "../../assets/blog.png";
 import NavbarMain from "../../components/NavbarMain";
 import back from "../../assets/back.jpg";
 import About from "../../components/AboutPage"; 
+import MakerPage from "../../components/MakerPage";
 
 function Home() {
   const navigate = useNavigate();
@@ -141,7 +142,7 @@ function Home() {
               Create a Blog
             </h1>
             <p ref={textRef} className="mb-6 text-lg font-roboto">
-              Share your Gossips with the world. Create a beautiful, annoying or even rebellious blog that comes to your mind.
+            Anonymously Share your Gossips with the world. Create a beautiful, annoying or even rebellious blog that comes to your mind.
             </p>
             <button
               ref={buttonRef}
@@ -163,6 +164,7 @@ function Home() {
       </div>
 
       <About /> 
+      <MakerPage/>
     </>
   );
 }
