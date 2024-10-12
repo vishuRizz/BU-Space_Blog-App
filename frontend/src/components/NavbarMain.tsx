@@ -24,7 +24,7 @@ function NavbarMain() {
         navigate("/blogs")
       }} className="cursor-pointer hover:text-gray-300">BLOGS</li>
             <li onClick={()=>{
-        navigate("/profile/2")
+        navigate("/profile")
       }} className="cursor-pointer hover:text-gray-300">PROFILE</li>
             <li onClick={()=>{
         navigate("/signin")

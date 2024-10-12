@@ -76,7 +76,7 @@ userRouter.post('/signup',async (c) => {
       const { bio, avatarUrl, website, socialHandles } = body;
       
       const token = c.req.header('Authorization')?.split(' ')[1];
-      if (!token) return c.json({ error: 'Unauthorized' }, 401);
+      if (!token) return c.json({ error: 'Unauthorized chutiye' }, 401);
   
       const decodedToken = await verify(token, c.env.JWT_SECRET);
       const userId = decodedToken.id as number;
@@ -88,7 +88,7 @@ userRouter.post('/signup',async (c) => {
       if (!user) {
         return c.json({ error: 'User not found' }, 404);
       }
-      
+
       let profile = await prisma.profile.findUnique({
         where: { userId: userId }
       });
@@ -123,6 +123,36 @@ userRouter.post('/signup',async (c) => {
     }
   });
 
-  
+  userRouter.get('/profile', async (c) => {
+    try {
+        const prisma = new PrismaClient({
+            datasourceUrl: c.env.DATABASE_URL
+        }).$extends(withAccelerate());
 
+        const token = c.req.header('Authorization')?.split(' ')[1]; 
+        if (!token) {
+            return c.json({ error: 'Unauthorized' }, 401);
+        }
 
+        const decoded = await verify(token, c.env.JWT_SECRET);
+        const userId = decoded.id as number
+
+        const profile = await prisma.profile.findUnique({
+            where: {
+                userId: userId,
+            },
+            include: {
+                user: true,
+            },
+        });
+
+        if (!profile) {
+            return c.json({ error: 'Profile not found' }, 404);
+        }
+
+        return c.json(profile);
+    } catch (error) {
+        console.error('Error fetching profile:', error);
+        return c.json({ error: 'Error fetching profile' }, 500);
+    }
+});
