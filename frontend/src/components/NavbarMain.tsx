@@ -2,6 +2,17 @@ import { useNavigate } from "react-router-dom"
 
 function NavbarMain() {
   const navigate = useNavigate()
+  const AuthChecker=()=>{
+    const token = localStorage.getItem("token")
+    if(!token){
+      navigate("/signin")
+    } else{
+      navigate("/new-blog")
+    }
+    
+
+  }
+
   return (
     <>
        <nav className="fixed top-0 left-0 right-0 z-10 flex items-center justify-between p-6 text-white bg-opacity-0">
@@ -22,7 +33,7 @@ function NavbarMain() {
           </div>
           <div>
             <button onClick={()=>{
-              navigate("/new-blog")
+              AuthChecker()
             }} className="px-4 py-2 text-black bg-white rounded-md font-poppins hover:bg-gray-200">
               WRITE A BLOG
             </button>

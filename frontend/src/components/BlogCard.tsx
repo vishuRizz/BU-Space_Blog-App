@@ -42,9 +42,11 @@ function BlogCard({autherName, title, content, publishedDate, id}: blogCardInter
   
    
     <div className="text-right">
+      <Link to={`/blog/${id}`}>
       <button className="font-medium text-blue-500 transition-colors hover:text-blue-700">
         Read more
       </button>
+      </Link>
     </div>
   </div>
   

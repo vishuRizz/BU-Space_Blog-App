@@ -1,3 +1,4 @@
+
 import BlogCard from "../../components/BlogCard"
 import BlogRight from "../../components/BlogRight"
 import Loader from "../../components/miniComponents/Loader";
@@ -5,6 +6,22 @@ import Navbar from "../../components/Navbar"
 import { useBlog } from "../../hooks"
 
 function Blogs() {
+
+   const token = localStorage.getItem("token")
+   if(!token){
+    return (
+      <div>
+        <Navbar/>
+        <div className="flex items-center justify-center h-screen text-2xl">
+         you are not authorised to access this page please signup first
+         </div>
+         </div>
+    )
+   }
+   else{
+    
+   
+  
     const {loading, blogs} = useBlog();
     if(loading){
         return (
@@ -29,7 +46,7 @@ function Blogs() {
             autherName={blog.auther.name || "Anonymous"}
             title={blog.title}
             content={blog.content}
-            publishedDate="10/10/2024"
+            publishedDate="11/10/2024"
           />
           ))}
            </div>
@@ -42,6 +59,7 @@ function Blogs() {
   
 
   )
+}
 }
 
 export default Blogs

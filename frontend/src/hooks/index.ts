@@ -19,7 +19,7 @@ const [blogs, setBlogs] = useState<Blog[]>([])
                     Authorization: `${localStorage.getItem("token")}`
                 }
             })
-            setBlogs(response.data)
+            setBlogs(response.data.reverse())
             setLoading(false)
         }
         fetchBlogs()
