@@ -6,6 +6,7 @@ import Blogs from "./pages/mainPages/Blogs";
 import Home from "./pages/mainPages/Home";
 import Profile from "./pages/mainPages/Profile";
 import NewBlogPage from "./pages/mainPages/NewBlogPage";
+import ForgetPass from "./pages/authPages/ForgetPass";
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/blogs" element={<Blogs/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/new-blog" element={<NewBlogPage/>}/>
+      <Route path="/forgetpassword" element={<ForgetPass/>} />
     </Routes>
     </BrowserRouter>
   )

@@ -66,6 +66,11 @@ const SigninMain = () => {
                 id="password"
                 placeholder="Password"
               />
+              <div onClick={()=>{
+                navigate("/forgetpassword")
+              }} className="pt-1 pl-2 mt-1 text-sm text-blue-600 cursor-pointer">
+                Forget Password? 
+              </div>
 
              
               <button className="login-button" type="submit">

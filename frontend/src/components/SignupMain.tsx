@@ -84,7 +84,7 @@ const SignupMain = () => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password"
+                placeholder="Password(min 6 char)"
               />
 
              
