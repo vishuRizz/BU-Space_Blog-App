@@ -3,19 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "scripts": {
-  "dev": "vite",
-  "build": "tsc -b && vite build",
-  "lint": "eslint .",
-  "preview": "vite preview"
-},
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@vishurizz/medium-blog": "^1.0.0",
     "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "vite-plugin-html": "^3.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
