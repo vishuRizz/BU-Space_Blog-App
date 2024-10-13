@@ -156,3 +156,36 @@ userRouter.post('/signup',async (c) => {
         return c.json({ error: 'Error fetching profile' }, 500);
     }
 });
+
+userRouter.get("/profile/:id", async(c)=>{
+try {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate());
+
+    const token = c.req.header("Authorization")?.split(' ')[1]
+    if(!token){
+        return c.json({error: "Unauthorized"}, 401)
+    }
+    const decodedToken = await verify(token, c.env.JWT_SECRET)
+    const requestorId = decodedToken.id as number; // doing this kyuki ts ki ma ki cccchhuu
+    const id = c.req.param().id;
+    const userId = parseInt(id, 10)
+const profile = await prisma.profile.findFirst({
+  where: {
+    userId: userId
+  },
+  include: {
+    user: true
+  }
+})
+if(!profile){
+  return c.json({error: "Profile not found bro"}, 404)
+}
+return c.json(profile, 200)
+
+} catch (error) {
+  console.error('Error fetching profile by ID:', error);
+  return c.json({ error: 'Error fetching profile' }, 500);
+}
+})
