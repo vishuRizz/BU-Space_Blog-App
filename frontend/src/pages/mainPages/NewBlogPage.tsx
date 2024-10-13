@@ -41,7 +41,7 @@ function BlogSubmission() {
         }}
       ></div>
 
-      <div className="relative z-10 w-full max-w-3xl p-8 bg-white rounded-lg shadow-md bg-opacity-30 backdrop-blur-md">
+      <div className="relative z-10 w-full max-w-3xl p-8 bg-white rounded-lg shadow-md max-md:px-4 bg-opacity-30 backdrop-blur-md">
         <h2 className="mb-6 text-3xl font-bold text-center text-gray-800 font-poppins">
           Create a New Blog
         </h2>

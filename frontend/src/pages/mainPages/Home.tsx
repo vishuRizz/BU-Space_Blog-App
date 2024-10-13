@@ -135,7 +135,13 @@ function Home() {
             </li>
             <li className="py-4">
               <button
-                onClick={() => localStorage.removeItem("token")}
+                onClick={() => {
+                  localStorage.removeItem("token")
+                  alert("you have been logged out of bu-space")
+                  navigate("/singin")
+                }
+                }
+                
                 className="text-lg font-semibold"
               >
                Logout

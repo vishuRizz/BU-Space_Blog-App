@@ -5,7 +5,7 @@ function ForgetPass() {
     <div>
         <Navbar/>
     <div className="flex items-center justify-center h-screen text-2xl">
-      This Functionality is not yet been added, you old account is being fucked <br />
+      This Functionality is not yet been added, you old account is been fucked <br />
       please make a new one
     </div>
     </div>

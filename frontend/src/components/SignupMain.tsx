@@ -5,36 +5,72 @@ import styled from "styled-components";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 
-
 const SignupMain = () => {
   const navigate = useNavigate();
-  
+
   const [postInputs, setPostInputs] = useState<SignupInput>({
     name: "",
     username: "",
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+
+  const validateEmail = (email: string) => {
+    if (!email.includes("@")) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        emailError: "Invalid email: must include '@'.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        emailError: "",
+      }));
+    }
+  };
+
+  const validatePassword = (password: string) => {
+    if (password.length < 6) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "Password must be at least 6 characters long.",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "",
+      }));
+    }
+  };
+
   async function SignupRequest(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); 
+    e.preventDefault();
+
+    if (errors.emailError || errors.passwordError) {
+      alert("Please fix the errors before submitting.");
+      return;
+    }
 
     try {
       console.log("control reaches axios call");
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs);
-      const jwt = response.data.jwt;  
+      const jwt = response.data.jwt;
 
       if (!jwt) {
         alert("Signup failed");
         return;
       }
-      localStorage.setItem("token","Bearer "+ jwt);  
-      navigate("/blogs"); 
+      localStorage.setItem("token", "Bearer " + jwt);
+      navigate("/blogs");
     } catch (error) {
       console.error("Error during signup:", error);
       alert("This Username already exists");
     }
   }
-
 
   return (
     <>
@@ -43,9 +79,7 @@ const SignupMain = () => {
           <div className="container">
             <div className="heading">Sign Up</div>
 
-          
             <form className="form" onSubmit={SignupRequest}>
-           
               <input
                 onChange={(e) =>
                   setPostInputs({
@@ -60,61 +94,60 @@ const SignupMain = () => {
                 placeholder="Name"
               />
               <input
-                onChange={(e) =>
+                onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
                     username: e.target.value,
-                  })
-                }
+                  });
+                  validateEmail(e.target.value);
+                }}
                 required
                 className="input"
                 name="username"
                 id="username"
                 placeholder="Email"
               />
+              {errors.emailError && (
+                <div className="text-sm text-red-500">{errors.emailError}</div>
+              )}
+
               <input
-                onChange={(e) =>
+                onChange={(e) => {
                   setPostInputs({
                     ...postInputs,
                     password: e.target.value,
-                  })
-                }
+                  });
+                  validatePassword(e.target.value);
+                }}
                 required
                 className="input"
                 type="password"
                 name="password"
                 id="password"
-                placeholder="Password(min 6 char)"
+                placeholder="Password (min 6 char)"
               />
+              {/* Display Password Error */}
+              {errors.passwordError && (
+                <div className="text-sm text-red-500">{errors.passwordError}</div>
+              )}
 
-             
               <button className="login-button" type="submit">
                 Sign Up
               </button>
             </form>
 
             <div>
-              <div className="cursor-pointer" onClick={()=>{
-                navigate("/signin")
-              }}>
+              <div className="cursor-pointer" onClick={() => navigate("/signin")}>
                 Already have an account? Sign In
               </div>
             </div>
 
-        
             <div className="social-account-container">
               <span className="title">Or Sign up with</span>
               <div className="social-accounts">
-              
-                <button className="social-button google">
-               
-                </button>
-                <button className="social-button apple">
-      
-                </button>
-                <button className="social-button twitter">
-              
-                </button>
+                <button className="social-button google"></button>
+                <button className="social-button apple"></button>
+                <button className="social-button twitter"></button>
               </div>
             </div>
 
@@ -127,7 +160,6 @@ const SignupMain = () => {
     </>
   );
 };
-
 const StyledWrapper = styled.div`
   .container {
   max-width: 350px;
