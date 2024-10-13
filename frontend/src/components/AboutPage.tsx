@@ -2,10 +2,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import NavbarMain from "./NavbarMain";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
+  const navigate = useNavigate()
   const headingRef = useRef(null);
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
@@ -79,7 +81,17 @@ function About() {
             Whether you want to blog about personal experiences, current events, Clubs, fights or creative writing,
             our platform is here to support you. Let's bring your voice to the world, anonymously and freely!
           </p>
+          <div className="p-2 rounded-lg border-slate-400">
+          <button  onClick={()=>{
+            navigate("/blogs")
+          }}
+              className="px-6 py-3 font-light text-black bg-white rounded-md font-poppins hover:bg-gray-200 md:hidden"  // Hide on md and larger
+            >
+              Check all Blogs
+            </button>
+          </div>
         </div>
+      
       </div>
     </>
   );
