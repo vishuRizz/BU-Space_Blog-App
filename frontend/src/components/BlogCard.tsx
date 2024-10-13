@@ -63,5 +63,4 @@ function AvatarComp({name}:{name: string}){
     </span>
 </div>
    )
-  
 }

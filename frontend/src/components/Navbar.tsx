@@ -32,12 +32,18 @@ function Navbar() {
       }} className="cursor-pointer hover:text-gray-300">LOG IN</li>
     </ul>
     </div>
-    <div>
+    <div className="flex">
       <button onClick={()=>{
        AuthChecker()
-      }} className="px-4 py-2 text-black bg-gray-100 rounded-md font-poppins hover:bg-gray-200">
+      }} className="px-4 py-2 mr-2 text-black bg-gray-100 rounded-md font-poppins hover:bg-gray-200">
         WRITE A BLOG
       </button>
+      <div className="cursor-pointer "
+       onClick={()=>{
+        navigate("/profile")
+      }}>
+      <AvatarComp  name="Profile"/>
+      </div>
     </div>
   </nav>
   )
@@ -45,4 +51,12 @@ function Navbar() {
 
 export default Navbar
 
-
+function AvatarComp({name}:{name: string}){
+  return (
+   <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full hover:bg-gray-300">
+   <span className="font-medium text-gray-600 dark:text-gray-300">
+       {name[0]}
+   </span>
+</div>
+  )
+}

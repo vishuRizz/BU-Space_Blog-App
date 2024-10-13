@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../../config';
 import Navbar from '../../components/Navbar';
+import LoaderTwo from '../../components/miniComponents/LoaderTwo';
 
 interface SocialHandles {
   instagram?: string | undefined;
@@ -87,7 +88,7 @@ const ProfilePage: React.FC = () => {
   if(isLoading){
     return (
       <div className="flex items-center justify-center w-full h-screen bg-white">
-        <div className="loader"></div>
+        <div className="loader"><LoaderTwo/></div>
       </div>
     )
   }
