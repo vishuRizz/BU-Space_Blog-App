@@ -147,7 +147,7 @@ function Home() {
             <button
               ref={buttonRef}
               onClick={toggleMenu}  
-              className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 md:hidden"  // Hide on md and larger
+              className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 " 
             >
               GET STARTED
             </button>

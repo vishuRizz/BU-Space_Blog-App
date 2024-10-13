@@ -85,7 +85,7 @@ function About() {
           <button  onClick={()=>{
             navigate("/blogs")
           }}
-              className="px-6 py-3 font-light text-black bg-white rounded-md font-poppins hover:bg-gray-200 md:hidden"  // Hide on md and larger
+              className="px-6 py-3 font-light text-black bg-white rounded-md font-poppins hover:bg-gray-200 "  
             >
               Check all Blogs
             </button>
