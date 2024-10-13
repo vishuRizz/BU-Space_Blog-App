@@ -114,7 +114,7 @@ function Home() {
                 onClick={() => navigate("/signup")}
                 className="text-lg font-semibold"
               >
-                Sign Up
+                Sign Up / Signin
               </button>
             </li>
             <li className="py-4">
@@ -122,7 +122,7 @@ function Home() {
                 onClick={() => navigate("/blogs")}
                 className="text-lg font-semibold"
               >
-                Blogs
+               All Blogs
               </button>
             </li>
             <li className="py-4">
@@ -130,7 +130,15 @@ function Home() {
                 onClick={() => navigate("/profile")}
                 className="text-lg font-semibold"
               >
-                Profile
+               Your Profile
+              </button>
+            </li>
+            <li className="py-4">
+              <button
+                onClick={() => localStorage.removeItem("token")}
+                className="text-lg font-semibold"
+              >
+               Logout
               </button>
             </li>
           </ul>
@@ -149,7 +157,7 @@ function Home() {
               onClick={toggleMenu}  
               className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 " 
             >
-              GET STARTED
+              Features
             </button>
           </div>
           <div className="w-[50%] h-[60%] pt-20 max-lg:hidden">

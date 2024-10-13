@@ -5,12 +5,10 @@ function NavbarMain() {
   const AuthChecker=()=>{
     const token = localStorage.getItem("token")
     if(!token){
-      navigate("/signin")
+      navigate("/signup")
     } else{
-      navigate("/new-blog")
+      navigate("/blogs")
     }
-    
-
   }
 
   return (
@@ -35,7 +33,7 @@ function NavbarMain() {
       <button onClick={()=>{
        AuthChecker()
       }} className="px-4 py-2 mr-2 text-black bg-gray-100 rounded-md font-poppins hover:bg-gray-200">
-        WRITE A BLOG
+       Get Started
       </button>
       <div className="cursor-pointer "
        onClick={()=>{
