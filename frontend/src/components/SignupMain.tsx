@@ -126,7 +126,6 @@ const SignupMain = () => {
                 id="password"
                 placeholder="Password (min 6 char)"
               />
-              {/* Display Password Error */}
               {errors.passwordError && (
                 <div className="text-sm text-red-500">{errors.passwordError}</div>
               )}

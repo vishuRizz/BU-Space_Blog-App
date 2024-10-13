@@ -8,6 +8,14 @@ import About from "../../components/AboutPage";
 import MakerPage from "../../components/MakerPage";
 
 function Home() {
+  const AuthNavigation = () =>{
+    const token = localStorage.getItem("token")
+    if(!token){
+      navigate("/signup")
+    } else{
+       navigate("/blogs")
+    }
+  }
   const navigate = useNavigate();
 
   const headingRef = useRef(null);
@@ -119,7 +127,7 @@ function Home() {
             </li>
             <li className="py-4">
               <button
-                onClick={() => navigate("/blogs")}
+                onClick={AuthNavigation}
                 className="text-lg font-semibold"
               >
                All Blogs
@@ -161,9 +169,16 @@ function Home() {
             <button
               ref={buttonRef}
               onClick={toggleMenu}  
-              className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 " 
+              className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 md:hidden" 
             >
               Features
+            </button>
+            <button
+              ref={buttonRef}
+              onClick={AuthNavigation}  
+              className="px-6 py-3 font-semibold text-black bg-white rounded-md font-poppins hover:bg-gray-200 max-md:hidden" 
+            >
+              Check our Blogs
             </button>
           </div>
           <div className="w-[50%] h-[60%] pt-20 max-lg:hidden">
