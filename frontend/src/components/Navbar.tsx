@@ -16,7 +16,9 @@ function Navbar() {
   return (
     <nav className="flex items-center justify-between w-full h-16 p-6 text-black bg-opacity-0 border-b ">
       
-    <a href="/home" className="text-3xl font-montserrat">BU SPACE</a>
+    <div onClick={()=>{
+      navigate("/home")
+    }} className="text-3xl font-montserrat">BU SPACE</div>
     <div className="max-lg:hidden">
     <ul className="flex items-center space-x-8 text-lg font-extralight">
       <li className="cursor-pointer hover:text-gray-300">PRODUCTS</li>

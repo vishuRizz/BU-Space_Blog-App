@@ -14,7 +14,9 @@ function NavbarMain() {
   return (
     <>
        <nav className="fixed top-0 left-0 right-0 z-10 flex items-center justify-between p-6 text-white bg-opacity-0">
-       <a href="/home" className="text-3xl font-montserrat">BU SPACE</a>
+       <div onClick={()=>{
+      navigate("/home")
+    }} className="text-3xl font-montserrat">BU SPACE</div>
        <div className="max-lg:hidden">
           <ul className="flex items-center space-x-8 text-lg font-extralight">
             <li className="cursor-pointer hover:text-gray-300">TEMPLATES</li>
