@@ -8,6 +8,15 @@ import About from "../../components/AboutPage";
 import MakerPage from "../../components/MakerPage";
 
 function Home() {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const token = localStorage.getItem("token")
+    if (token){
+      navigate("/blogs")
+    }
+  }, [])
+ 
+ 
   const AuthNavigation = () =>{
     const token = localStorage.getItem("token")
     if(!token){
@@ -16,7 +25,7 @@ function Home() {
        navigate("/blogs")
     }
   }
-  const navigate = useNavigate();
+ 
 
   const headingRef = useRef(null);
   const textRef = useRef(null);
