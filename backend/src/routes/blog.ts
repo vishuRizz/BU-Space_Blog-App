@@ -134,7 +134,8 @@ blogRouter.get('/bulk', async (c) => {
         content: true,
         auther: {
           select: {
-            name: true
+            name: true,
+            id: true
           }
         }
       }
@@ -168,7 +169,8 @@ blogRouter.get('/:id', async (c) => {
         content: true,
         auther: {
           select: {
-            name: true
+            name: true,
+            id: true
           }
         }
       }

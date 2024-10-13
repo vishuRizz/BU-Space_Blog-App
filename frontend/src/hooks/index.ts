@@ -30,7 +30,7 @@ const [blogs, setBlogs] = useState<Blog[]>([])
 export const UseBlogId=({id}:{id: number})=>{
     interface Blog {
         id: number
-        auther: { name: string };
+        auther: { name: string, id: number };
         title: string;
         content: string;
       }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../../config';
-import Navbar from '../../components/Navbar';
+import { useParams } from 'react-router-dom';
 
 interface SocialHandles {
   instagram?: string | undefined;
@@ -20,7 +20,9 @@ interface Profile {
   };
 }
 
-const ProfilePage: React.FC = () => {
+const AnyUserProfile: React.FC = () => {
+  const {id} = useParams();
+  const userId = id ? parseInt(id, 10) : null
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -30,9 +32,10 @@ const ProfilePage: React.FC = () => {
   const [linkedin, setLinkedin] = useState('');
 
   useEffect(() => {
+    console.log(userId)
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${BACKEND_URL}/api/v1/user/profile`, {
+        const response = await axios.get(`${BACKEND_URL}/api/v1/user/profile/${userId}`, {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
           },
@@ -62,28 +65,28 @@ const ProfilePage: React.FC = () => {
     fetchProfile();
   }, []);
 
-  const handleUpdateProfile = async () => {
-    try {
-      const updatedProfile: Profile = {
-        id: profile?.id || 0, 
-        user: profile?.user || { name: '', username: '' }, 
-        bio,
-        website,
-        socialHandles: { instagram, linkedin },
-        avatarUrl: profile?.avatarUrl, 
-      };
+  // const handleUpdateProfile = async () => {
+  //   try {
+  //     const updatedProfile: Profile = {
+  //       id: profile?.id || 0, 
+  //       user: profile?.user || { name: '', username: '' }, 
+  //       bio,
+  //       website,
+  //       socialHandles: { instagram, linkedin },
+  //       avatarUrl: profile?.avatarUrl, 
+  //     };
   
-      await axios.post(`${BACKEND_URL}/api/v1/user/profile`, updatedProfile, {
-        headers: {
-          Authorization: `${localStorage.getItem("token")}`,
-        },
-      });
-      setProfile(updatedProfile);
-      setIsEditing(false);
-    } catch (error: any) {
-      console.error('Error updating profile:', error.message);
-    }
-  };
+  //     await axios.post(`${BACKEND_URL}/api/v1/user/profile`, updatedProfile, {
+  //       headers: {
+  //         Authorization: `${localStorage.getItem("token")}`,
+  //       },
+  //     });
+  //     setProfile(updatedProfile);
+  //     setIsEditing(false);
+  //   } catch (error: any) {
+  //     console.error('Error updating profile:', error.message);
+  //   }
+  // };
   if(isLoading){
     return (
       <div className="flex items-center justify-center w-full h-screen bg-white">
@@ -93,8 +96,6 @@ const ProfilePage: React.FC = () => {
   }
   
   return (
-    <>
-    <Navbar/>
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
       <div className="w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
         <h1 className="mb-6 text-4xl font-bold text-center">Profile</h1>
@@ -154,58 +155,10 @@ const ProfilePage: React.FC = () => {
           </ul>
         </div>
 
-        <button
-          onClick={() => setIsEditing(true)}
-          className="px-4 py-2 mt-4 font-semibold text-white transition duration-300 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700"
-        >
-          Update Profile
-        </button>
-
-        {isEditing && (
-          <div className="p-4 mt-6 border border-gray-200 rounded-lg bg-gray-50">
-            <h3 className="mb-2 text-xl font-semibold">Update Profile</h3>
-            <div className="space-y-4">
-              <input
-                type="text"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="Update Bio"
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-              <input
-                type="text"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                placeholder="Update Website"
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-              <input
-                type="text"
-                value={instagram}
-                onChange={(e) => setInstagram(e.target.value)}
-                placeholder="Update Instagram Handle"
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-              <input
-                type="text"
-                value={linkedin}
-                onChange={(e) => setLinkedin(e.target.value)}
-                placeholder="Update LinkedIn Profile"
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-              <button
-                onClick={handleUpdateProfile}
-                className="w-full px-4 py-2 font-semibold text-white transition duration-300 bg-green-600 rounded-lg shadow-md hover:bg-green-700"
-              >
-                Save Changes
-              </button>
-            </div>
-          </div>
-        )}
+      
       </div>
     </div>
-    </>
   );
 };
 
-export default ProfilePage;
+export default AnyUserProfile;

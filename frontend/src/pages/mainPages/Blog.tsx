@@ -26,10 +26,12 @@ function Blog() {
   return (
     <div>
       <Navbar/>
-      <SingleBlog  title= {blog.title }
+      <SingleBlog 
+      userId={blog.auther.id}
+      title= {blog.title }
     content= {blog.content}
     authorName= {blog.auther.name}
-    publishedDate=  {"10/10/2024"}/>
+    publishedDate=  {"13/10/2024"}/>
     </div>
   )
 }

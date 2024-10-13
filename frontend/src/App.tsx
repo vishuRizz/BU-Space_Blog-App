@@ -7,6 +7,7 @@ import Home from "./pages/mainPages/Home";
 import Profile from "./pages/mainPages/Profile";
 import NewBlogPage from "./pages/mainPages/NewBlogPage";
 import ForgetPass from "./pages/authPages/ForgetPass";
+import UserProfile from "./pages/mainPages/AnyUserProfile";
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/new-blog" element={<NewBlogPage/>}/>
       <Route path="/forgetpassword" element={<ForgetPass/>} />
+      <Route path="/profile/:id" element={<UserProfile/>} />
     </Routes>
     </BrowserRouter>
   )

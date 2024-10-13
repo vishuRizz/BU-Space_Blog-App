@@ -1,20 +1,25 @@
+import { useNavigate } from "react-router-dom"
+
 interface blogDetails{
     title: string,
     content: string,
     authorName: string,
     publishedDate:  string,
+    userId: number
 }
-function SingleBlog({title, content, authorName, publishedDate}: blogDetails) {
+function SingleBlog({title, content, authorName, publishedDate, userId}: blogDetails) {
+  const navigate = useNavigate()
   return (
     <div>
         <div className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl p-8 mx-auto bg-white rounded-lg shadow-lg">
-        <h1 className="mb-6 text-4xl font-bold text-gray-900">{title}</h1>
-
-        <div className="flex items-center mb-4 text-gray-600">
-          <span className="mr-4 text-lg font-medium">{authorName}</span>
+      <div className="flex items-center mb-4 text-gray-600 cursor-pointer">
+          <span onClick={()=>{
+            navigate(`/profile/${userId}`)
+          }} className="mr-4 text-xl font-medium">{authorName}</span>
           <span className="text-sm">{publishedDate}</span>
         </div>
+        <h1 className="mb-6 text-4xl font-bold text-gray-900">{title}</h1>
 
         <div className="text-lg leading-relaxed text-gray-800">
          {content}
